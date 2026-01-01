@@ -60,19 +60,156 @@ DD作業を開始する際は、まずこのファイル（`DD方法.md`）を�
 
 ---
 
+### ステップ2.5: 各フォルダ内のファイルサマリの作成
+
+ステップ2でコピーしたファイルのうち、Markdownファイル以外のファイル（PDF、Excel、Word、画像ファイル等）のサマリを、各フォルダ内の既存のMarkdownファイル（サマリファイル）に記載します。
+
+#### 2.5.1 サマリ作成の対象
+
+- **対象フォルダ**: `dd materials`配下のすべてのサブフォルダ
+- **対象ファイル**: 各フォルダ内のMarkdownファイル以外のすべてのファイル
+  - PDFファイル（`.pdf`）
+  - Excelファイル（`.xlsx`, `.xls`）
+  - Wordファイル（`.docx`, `.doc`）
+  - 画像ファイル（`.png`, `.jpg`, `.jpeg`等）
+  - その他のドキュメントファイル
+
+#### 2.5.2 サマリファイルの特定
+
+各フォルダ内に以下の命名規則でサマリファイルが存在する場合、そのファイルを使用します：
+- `{フォルダ名}サマリ.md`（例: `今後の事業計画・予測表サマリ.md`）
+- サマリファイルが存在しない場合は、新規作成します
+
+#### 2.5.3 サマリ作成の手順
+
+1. **各フォルダを順番に確認**
+   - `dd materials/business/`配下の各フォルダ
+   - `dd materials/contract/`配下の各フォルダ
+   - `dd materials/corporate/`配下の各フォルダ
+   - `dd materials/financial/`配下の各フォルダ
+   - `dd materials/round table/`配下の各フォルダ
+
+2. **各フォルダ内のファイルを確認**
+   - Markdownファイル（`.md`）以外のファイルをリストアップ
+   - ファイル名、ファイルサイズ、更新日時を記録
+
+3. **サマリファイルに記載する内容**
+
+各ファイルについて、以下の情報をサマリファイルに記載します：
+
+```markdown
+## {ファイル名}
+
+### 基本情報
+- **ファイル名**: {実際のファイル名}
+- **ファイル形式**: {PDF/Excel/Word/画像等}
+- **ファイルサイズ**: {サイズ}
+- **更新日時**: {日時}
+
+### 内容サマリ
+{ファイルの内容を要約}
+
+### 主要なポイント
+- {重要なポイント1}
+- {重要なポイント2}
+- {重要なポイント3}
+
+### 投資判断への影響
+{このファイルの内容が投資判断にどのような影響を与えるか}
+```
+
+#### 2.5.4 サマリ作成の例
+
+**例: `dd materials/business/今後の事業計画・予測表/`フォルダの場合**
+
+1. フォルダ内のファイルを確認
+   - `事業計画書_2024.xlsx`（Excelファイル）
+   - `売上予測表.pdf`（PDFファイル）
+   - `今後の事業計画・予測表サマリ.md`（既存のサマリファイル）
+
+2. `今後の事業計画・予測表サマリ.md`に以下を記載：
+
+```markdown
+# 今後の事業計画・予測表 サマリ
+
+## 事業計画書_2024.xlsx
+
+### 基本情報
+- **ファイル名**: 事業計画書_2024.xlsx
+- **ファイル形式**: Excel
+- **ファイルサイズ**: 2.5MB
+- **更新日時**: 2024年10月15日
+
+### 内容サマリ
+2024年度から2027年度までの3年間の事業計画が記載されたExcelファイル。
+売上、利益、資金繰り、人員計画等が詳細に記載されている。
+
+### 主要なポイント
+- 2024年度売上目標: 5億円
+- 2027年度売上目標: 20億円（CAGR: 約60%）
+- 2025年度に黒字化予定
+- 人員は2024年度末で30名、2027年度末で100名に拡大予定
+
+### 投資判断への影響
+成長率が高く、黒字化の見通しが明確。ただし、人員拡大に伴うコスト増加に注意が必要。
+
+---
+
+## 売上予測表.pdf
+
+### 基本情報
+- **ファイル名**: 売上予測表.pdf
+- **ファイル形式**: PDF
+- **ファイルサイズ**: 1.2MB
+- **更新日時**: 2024年10月10日
+
+### 内容サマリ
+月次・四半期・年次の売上予測が記載されたPDFファイル。
+
+### 主要なポイント
+- 季節性が強い（Q4がピーク）
+- 新規顧客獲得による成長が見込まれる
+
+### 投資判断への影響
+季節変動を考慮した資金繰り計画が必要。
+```
+
+#### 2.5.5 注意事項
+
+- **ファイルが多すぎる場合**: 重要なファイルから優先的にサマリを作成
+- **機密情報の取り扱い**: 機密情報が含まれる場合は、サマリにも機密マークを記載
+- **ファイルの種類に応じた記載**: PDF、Excel、Wordなど、ファイル形式に応じて適切な情報を抽出
+- **定期的な更新**: 新しいファイルが追加された場合は、随時サマリを更新
+
+#### 2.5.6 サマリ作成の自動化（推奨）
+
+Cursor等のAIツールを使用する場合、以下のような依頼をすることで効率的にサマリを作成できます：
+
+```
+「{フォルダパス}内のMarkdownファイル以外のファイルを確認して、
+{サマリファイル名}に各ファイルのサマリを記載してください」
+```
+
+**確認事項**:
+- すべてのフォルダでサマリファイルが作成・更新されているか
+- 重要なファイルのサマリが漏れていないか
+- サマリの内容が正確で、投資判断に役立つ情報が含まれているか
+
+---
+
 ### ステップ3: 基本情報の更新
 
 `業務整理用`フォルダ内の資料を全て読み込み、以下のファイルを更新します。
 
 #### 3.1 事業概要の更新
-- **対象ファイル**: `dd materials/business/企業概要.md`
+- **対象ファイル**: `dd materials/business/事業概要.md`
 - **作業内容**:
   - ピッチ資料、事業計画書、営業資料等を読み込み
   - 事業内容、サービス、ターゲット市場、事業モデルを整理
   - 過去の事業の変化・進化を記載
 
 #### 3.2 投資条件の更新
-- **対象ファイル**: `dd materials/round table/当ラウンドのタームシート/投資条件.md`
+- **対象ファイル**: `dd materials/round table/投資条件概要.md`
 - **作業内容**:
   - タームシート、資本政策表、株主名簿等を読み込み
   - 調達スケジュール、調達条件、資金使途を具体的な数値で更新
@@ -89,7 +226,7 @@ DD作業を開始する際は、まずこのファイル（`DD方法.md`）を�
 
 更新した`事業概要.md`と`投資条件.md`を元に、`ヒアリングリスト.md`を更新します。
 
-- **対象ファイル**: `dd materials/dd question/ヒアリングリスト.md`
+- **対象ファイル**: `review_and_hypothesis/dd question/ヒアリングリスト.md`
 - **作業内容**:
   - 既に把握している情報を反映
   - 不足している情報を特定
@@ -105,16 +242,16 @@ DD作業を開始する際は、まずこのファイル（`DD方法.md`）を�
 
 ### ステップ5: 資料レビューと評価の実施
 
-`business`、`contract`、`corporate`、`round table`フォルダ内の資料を読み込み、評価結果を`review_results`フォルダ内の各Markdownファイルに記載します。
+`dd materials/business`、`dd materials/contract`、`dd materials/corporate`、`dd materials/round table`フォルダ内の資料を読み込み、評価結果を`review_and_hypothesis/review_results`フォルダ内の各Markdownファイルに記載します。
 
 #### 5.1 レビュー対象と出力先
 
 | レビュー対象フォルダ | 評価結果ファイル | 評価観点 |
 |---------------------|-----------------|---------|
-| `business/` | `review_results/事業性評価.md` | 事業モデル、市場ポジション、成長性、競合優位性 |
-| `contract/` | `review_results/契約書レビュー.md` | 法的リスク、財務的影響、事業リスク、投資判断への影響 |
-| `corporate/` | `review_results/事業性評価.md`（組織面） | 経営陣の質、組織体制、人材、継続性 |
-| `round table/` | `review_results/投資条件評価.md` | 評価額の妥当性、調達条件、資金使途、出口戦略 |
+| `dd materials/business/` | `review_and_hypothesis/review_results/事業性評価.md` | 事業モデル、市場ポジション、成長性、競合優位性 |
+| `dd materials/contract/` | `review_and_hypothesis/review_results/契約書レビュー.md` | 法的リスク、財務的影響、事業リスク、投資判断への影響 |
+| `dd materials/corporate/` | `review_and_hypothesis/review_results/事業性評価.md`（組織面） | 経営陣の質、組織体制、人材、継続性 |
+| `dd materials/round table/` | `review_and_hypothesis/review_results/投資条件評価.md` | 評価額の妥当性、調達条件、資金使途、出口戦略 |
 
 #### 5.2 評価の実施方法
 
@@ -138,7 +275,7 @@ DD作業を開始する際は、まずこのファイル（`DD方法.md`）を�
 
 ### ステップ6: 投資仮説の作成
 
-`hypothesis`フォルダ内のMarkdownファイルを更新し、複数の投資仮説を作成します。
+`review_and_hypothesis`フォルダ内のMarkdownファイルを更新し、複数の投資仮説を作成します。
 
 #### 6.1 投資仮説の構成要素
 
@@ -152,15 +289,15 @@ DD作業を開始する際は、まずこのファイル（`DD方法.md`）を�
 
 #### 6.2 更新対象ファイル
 
-- `hypothesis/senario/investment_theory.md`: 投資理論・投資テーゼ
-- `hypothesis/strength/MOAT.md`: 競合優位性
-- `hypothesis/strength/競合優位性.md`: 競合優位性（日本語版）
-- `hypothesis/senario/exit_plan.md`: 出口戦略
-- `hypothesis/senario/m_and_a_candidate.md`: M&A候補企業
-- `hypothesis/risk/リスク項目.md`: リスク要因
-- `hypothesis/synergy/事業シナジー.md`: 事業シナジー
-- `hypothesis/comps/DCF.md`: DCF評価
-- `hypothesis/comps/EV_Sales.md`: EV/Sales評価
+- `review_and_hypothesis/senario/investment_theory.md`: 投資理論・投資テーゼ
+- `review_and_hypothesis/strength/MOAT.md`: 競合優位性
+- `review_and_hypothesis/strength/競合優位性.md`: 競合優位性（日本語版）
+- `review_and_hypothesis/senario/exit_plan.md`: 出口戦略
+- `review_and_hypothesis/senario/m_and_a_candidate.md`: M&A候補企業
+- `review_and_hypothesis/risk/リスク項目.md`: リスク要因
+- `review_and_hypothesis/synergy/事業シナジー.md`: 事業シナジー
+- `review_and_hypothesis/comps/DCF.md`: DCF評価
+- `review_and_hypothesis/comps/EV_Sales.md`: EV/Sales評価
 
 **作業内容**:
 - ステップ5の評価結果を踏まえて投資仮説を構築
@@ -191,8 +328,8 @@ DD作業を開始する際は、まずこのファイル（`DD方法.md`）を�
 - `research/market and competitors/`: 市場・競合分析
 - `research/業界課題とソリューション/`: 業界課題とソリューション
 - `research/deep research/MA事例/`: M&A事例
-- `research/deep research/ROI事例/`: ROI事例
-- `research/現場調査/`: 現場調査結果
+- `research/deep research/IPO事例/`: IPO事例
+- `review_and_hypothesis/現場調査記録/`: 現場調査結果
 
 #### 7.3 調査結果のまとめ方
 
@@ -213,7 +350,7 @@ DD作業を開始する際は、まずこのファイル（`DD方法.md`）を�
 
 #### 8.1 Web記事の保存
 
-- **保存先**: `web resource/`フォルダ
+- **保存先**: `dd materials/web resource/Web/`フォルダ
 - **作業内容**:
   - 参考になったWeb記事をMarkdownファイルとして保存
   - 記事のURL、公開日、主要な内容を記載
@@ -222,7 +359,7 @@ DD作業を開始する際は、まずこのファイル（`DD方法.md`）を�
 
 #### 8.2 Notion情報の保存
 
-- **保存先**: `web resource/Notion/`フォルダ
+- **保存先**: `dd materials/web resource/Notion/`フォルダ
 - **作業内容**:
   - Notionから取得した情報をMarkdownファイルとして保存
   - 情報の出典（NotionページのURL等）を記載
@@ -242,10 +379,11 @@ DD作業を開始する際は、まずこのファイル（`DD方法.md`）を�
 #### 9.1 完了確認チェックリスト
 
 - [ ] ステップ2: 業務整理用資料の分類・配置が完了
+- [ ] ステップ2.5: 各フォルダ内のファイルサマリが作成・更新済み
 - [ ] ステップ3: 事業概要.mdと投資条件.mdが更新済み
 - [ ] ステップ4: ヒアリングリスト.mdが更新済み
-- [ ] ステップ5: review_results内の各評価ファイルが作成・更新済み
-- [ ] ステップ6: hypothesis内の投資仮説ファイルが更新済み
+- [ ] ステップ5: review_and_hypothesis/review_results内の各評価ファイルが作成・更新済み
+- [ ] ステップ6: review_and_hypothesis内の投資仮説ファイルが更新済み
 - [ ] ステップ7: research内のリサーチ結果がまとめられている
 - [ ] ステップ8: 参考資料が適切に保存されている
 

@@ -10,28 +10,41 @@
 
 ### 初めて使用する場合
 
-1. **まず `DD方法.md` を読む**
+1. **まず `DD手順.md` を読む**
    - DD作業の全体像と手順を把握してください
    - 各ステップの目的と作業内容を確認してください
-   - Curosorで最初に依頼する内容を「`DD方法.md` を読んで」にしてください
 
-2. **業務整理用資料の分類**
-   - `業務整理用/` フォルダ内の資料を `dd materials/` の各セクションに適切に配置してください
+2. **擬似コマンドシステムの確認**
+   - **擬似コマンド一覧**: `agents/cursor/commands.md`
+   - **システム指示書**: `agents/cursor/system.md`
+   - **全体像**: `agents/cursor/dd_method/00_overview.md`
 
-3. **基本情報の更新**
-   - `dd materials/business/事業概要.md` を更新
-   - `dd materials/round table/投資条件概要.md` を更新
+3. **初期セットアップの実行**
+   - **一括実行**: `/dd:init` または `@agents/prompts/dd_init.md` を実行
+   - **個別実行**: 各ステップに対応するコマンドを実行（`agents/cursor/commands.md` 参照）
 
-4. **ヒアリングリストの更新**
-   - `review_and_hypothesis/dd question/ヒアリングリスト.md` を更新
-
-詳細な手順は `DD方法.md` を参照してください。
+詳細な手順は `DD手順.md` または `agents/cursor/dd_method/` 配下の各ファイルを参照してください。
 
 ## 📁 ディレクトリ構成
 
 ```
 DD_template/
-├── DD方法.md                    # DD作業の手順ガイド（必読）
+├── DD手順.md                    # DD作業の手順ガイド（必読・概要版）
+├── agents/                      # Cursor向けエージェント指示書
+│   ├── cursor/                  # Cursor向け指示書
+│   │   ├── system.md            # 「このリポジトリでどう働くか」
+│   │   ├── commands.md          # 擬似スラッシュコマンド設計
+│   │   ├── checklists.md        # 更新チェックリスト（週次/決算）
+│   │   └── dd_method/           # DD手順のステップ別詳細
+│   │       ├── 00_overview.md   # 全体像
+│   │       ├── 01_copy_and_classify.md
+│   │       ├── 02_summarize_files.md
+│   │       └── ... (各ステップ)
+│   └── prompts/                 # 個別プロンプト（用途別）
+│       ├── dd_init.md           # 初期セットアップ一括
+│       ├── dd_copy_materials.md  # 資料コピー
+│       ├── dd_summarize_folder.md
+│       └── ... (各コマンド用プロンプト)
 ├── dd materials/                # デューデリジェンス資料
 │   ├── business/                # 事業関連資料
 │   ├── contract/                # 契約書関連資料
@@ -59,56 +72,60 @@ DD_template/
 
 ## 🔄 作業フロー
 
-### DD方法.mdのプロセス
+### 擬似コマンドシステムの使い方
 
-`DD方法.md`に記載されている標準的なDD作業プロセスは以下の通りです：
+このリポジトリでは、**擬似スラッシュコマンド**を使ってCursorに作業を依頼できます。
 
-1. **`業務整理用/` にあるファイルを `dd materials/` にコピー**
-   - `業務整理用/` フォルダ内の各ファイルを、対応表に従って `dd materials/` の適切なディレクトリにコピー
-   - 元のファイルは `業務整理用/` に残しておく（バックアップとして）
+#### 基本的な使い方
 
-2. **`dd materials/` のそれぞれのディレクトリ内にあるファイル内容をそれぞれのmdファイルに分析を記録**
-   - 各ディレクトリ内のMarkdownファイル以外のファイル（PDF、Excel、Word等）のサマリを、各フォルダ内のサマリファイル（`{フォルダ名}サマリ.md`）に記載
-   - ファイルの内容を分析し、投資判断に必要な情報を整理
+1. **コマンドで呼ぶ**
+   - 例: `/dd:init 会社名="XXX" 対象期間="2024-2025"` を実行して
 
-3. **`research/` を `dd materials/` から推察してざっくりテーマを決めてリサーチ結果を追加していく**
-   - `dd materials/` の内容を基に、必要なリサーチテーマを特定
-   - 市場・競合分析、M&A事例、IPO事例等の調査を実施
-   - 調査結果を `research/` フォルダ内の適切なMarkdownファイルにまとめる
+2. **プロンプトファイルで呼ぶ（推奨）**
+   - 例: `@agents/prompts/dd_init.md` をこの案件に合わせて実行して
 
-4. **`review_and_hypothesis/` の初期レビューを `dd materials/` と `research/` をもとに更新**
-   - `dd materials/` と `research/` の情報を統合的に分析
-   - 事業性評価、契約書レビュー、財務状況評価、投資条件評価等の評価結果を `review_and_hypothesis/review_results/` に記載
-   - 投資仮説、競合優位性、リスク要因等を `review_and_hypothesis/` 内の各ファイルに記載
+#### 主要なコマンド一覧
 
-### その他のアクション
+- **`/dd:init`**: 初期セットアップ一括実行
+- **`/dd:copy`**: 業務整理用→dd materials へ配置
+- **`/dd:summarize`**: 非mdファイルのサマリ追記
+- **`/dd:update_basics`**: 事業概要/投資条件の更新
+- **`/dd:questions`**: ヒアリングリスト更新
+- **`/dd:review`**: 初期レビュー（領域別に実行）
+- **`/dd:thesis`**: 投資仮説の作成
+- **`/dd:research`**: リサーチ追加
+- **`/dd:resource`**: 参考資料の追加（Web/Notion）
+- **`/dd:ic_slide`**: 投資委員会資料の骨格更新
+- **`/dd:wrap`**: 完了報告
 
-上記の標準プロセスに加えて、以下のアクションを必要に応じて実施します：
+詳細は `agents/cursor/commands.md` を参照してください。
 
-1. **自分で `review_and_hypothesis/` の文章mdを執筆する**
-   - 投資テーゼ、成長シナリオ、競合優位性、リスク分析等を自分で執筆・更新
-   - 評価結果を踏まえた投資判断の根拠を明確化
+### 標準的なDD作業プロセス
 
-2. **`dd materials/web resource/` に参考資料を追加し、`review_and_hypothesis/` を若干更新する**
-   - 参考になったWeb記事やNotion情報を `dd materials/web resource/` に保存
-   - 参考資料の内容を踏まえて、`review_and_hypothesis/` 内の関連ファイルを更新
+`DD手順.md` または `agents/cursor/dd_method/00_overview.md` に記載されている標準的なDD作業プロセスは以下の通りです：
 
-3. **`research/` の中でリサーチを行う**
-   - 市場動向、競合企業、業界課題等の追加リサーチを実施
-   - 調査結果を `research/` フォルダ内の適切なファイルに追加
+1. **`業務整理用/` にあるファイルを `dd materials/` にコピー** (`/dd:copy`)
+2. **`dd materials/` の各ディレクトリ内のファイル内容をサマリに記録** (`/dd:summarize`)
+3. **基本情報の更新** (`/dd:update_basics`)
+4. **ヒアリングリストの更新** (`/dd:questions`)
+5. **初期レビューの実践** (`/dd:review`)
+6. **投資仮説の作成** (`/dd:thesis`)
+7. **リサーチテーマの設定と調査** (`/dd:research`)
+8. **参考資料の整理** (`/dd:resource`)
+9. **完了報告** (`/dd:wrap`)
 
-4. **`research/` に参考資料を追加し、`review_and_hypothesis/` を若干更新する**
-   - リサーチ中に得た参考資料を `research/` に保存
-   - 参考資料の内容を踏まえて、`review_and_hypothesis/` 内の関連ファイルを更新
+### 一括実行
 
-5. **`review_and_hypothesis/投資委員会資料作成/スライドスケルトン.md` を投資委員会用にそれ以外の資料から若干アップデートする**
-   - スライドスケルトンを参照しながら、`dd materials/` と `review_and_hypothesis/` の情報を基に投資委員会資料を作成
-   - 各スライドで参照すべきファイルを確認しながら、情報を統合してスライドを作成
+初期セットアップを一括で実行する場合：
+- **`/dd:init`** または `@agents/prompts/dd_init.md` を実行
 
 ## 📝 主要ファイル
 
 ### ガイドファイル
-- **`DD方法.md`**: DD作業の全体手順と各ステップの詳細説明
+- **`DD手順.md`**: DD作業の全体手順と各ステップの概要（詳細は `agents/cursor/dd_method/` 参照）
+- **`agents/cursor/commands.md`**: 擬似スラッシュコマンド一覧
+- **`agents/cursor/system.md`**: Cursor向けシステム指示書
+- **`agents/cursor/dd_method/00_overview.md`**: DD作業の全体像
 - **`review_and_hypothesis/投資委員会資料作成/スライドスケルトン.md`**: 投資委員会資料のスライド構成テンプレート
 
 ### 評価結果ファイル
@@ -140,13 +157,25 @@ DD_template/
 
 ## 📚 関連リソース
 
-- **DD方法ガイド**: `DD方法.md`
+### ガイド・ドキュメント
+- **DD手順ガイド**: `DD手順.md`（概要版）
+- **DD手順詳細**: `agents/cursor/dd_method/00_overview.md` 以降
+- **擬似コマンド一覧**: `agents/cursor/commands.md`
+- **システム指示書**: `agents/cursor/system.md`
+- **チェックリスト**: `agents/cursor/checklists.md`
+
+### プロンプトファイル
+- **初期セットアップ**: `agents/prompts/dd_init.md`
+- **各コマンド用プロンプト**: `agents/prompts/` 配下
+
+### その他
 - **スライド作成ガイド**: `review_and_hypothesis/投資委員会資料作成/スライドスケルトン.md`
 - **ヒアリングリスト**: `review_and_hypothesis/dd question/ヒアリングリスト.md`
 
 ## 🔄 更新履歴
 
 - **2025年11月**: 初版作成
+- **2026年1月**: 更新版作成
 
 ---
 

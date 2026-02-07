@@ -31,3 +31,5 @@ build/
 # 案件フォルダ（機密・案件別データはリポジトリに含めない）
 # deals 自体は無視せず、その下のファイル・フォルダのみ ignore
 deals/**
+# deals の役割説明用 README はリポジトリに含める
+!deals/README.md

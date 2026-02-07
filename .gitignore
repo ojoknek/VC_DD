@@ -29,4 +29,5 @@ build/
 .obsidian/workspace.json
 
 # 案件フォルダ（機密・案件別データはリポジトリに含めない）
-deals/
+# deals 自体は無視せず、その下のファイル・フォルダのみ ignore
+deals/**

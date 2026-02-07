@@ -1,4 +1,4 @@
-# DD Template 用 Cursor Skills
+# VC DD 用 Cursor Skills
 
 DD手順に沿って要素分解したスキル群です。入口は **dd-workflow**、共通ルールは **dd-common**、各ステップは対応するスキルを参照してください。
 
